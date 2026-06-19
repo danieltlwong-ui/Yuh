@@ -272,7 +272,7 @@
     }
     .counselor-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: #FDB515;
+      background: #5ba4cf;
     }
     .c-photo {
       width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
@@ -281,7 +281,7 @@
     }
     .c-school-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: #fff8e1; color: #7a5500;
+      background: #e8f4fd; color: #1a5276;
       font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
       margin-bottom: 1.25rem;
     }
@@ -331,9 +331,9 @@
     .selectivity-cards { display: flex; flex-direction: column; gap: 16px; }
     .select-card {
       background: #f5f8fc; border: 1px solid #e0e8f0; border-radius: 12px;
-      padding: 1.5rem; display: flex; gap: 1rem; align-items: center; flex: 1;
+      padding: 1.5rem; display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; align-items: center;
     }
-    .select-card h4 { font-size: 14px; font-weight: 600; color: #001e3c; margin-bottom: 4px; }
+    .select-card h4 { font-size: 14px; font-weight: 600; color: #001e3c; }
     .select-card p { font-size: 13px; color: #5c7a9f; line-height: 1.65; }
 
     /* ── PROCESS ───────────────────────────────────────────── */
@@ -554,24 +554,32 @@
       .edge-grid { grid-template-columns: 1fr; }
       .how-grid { grid-template-columns: 1fr; }
       .why-grid { grid-template-columns: 1fr; }
-      .selectivity-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .selectivity-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .selectivity-cards { gap: 12px; }
+      .select-card { padding: 1.25rem; }
       .essay-pair { grid-template-columns: 1fr; }
+      .essay-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.25rem 1.25rem; }
+      .essay-price { text-align: left; width: auto; font-size: 24px; }
       .essay-callout { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
       .hero-team { gap: 1rem; }
       .hero-team-card img { width: 52px; height: 52px; }
-      .campuses-grid { grid-template-columns: repeat(2, 1fr); }
+      .campuses-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .counselors-grid { grid-template-columns: 1fr; }
       .plans-grid { grid-template-columns: 1fr; }
-      .diag-wrapper { grid-template-columns: 1fr; gap: 3.5rem; }
-      .hero-stats { flex-wrap: wrap; }
-      .stat { min-width: 130px; }
+      .plan-card { padding: 1.75rem; }
+      .diag-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-stats { flex-wrap: wrap; gap: 0; }
+      .stat { min-width: 130px; flex: 1 1 130px; }
       .rate-big { font-size: 80px; }
-      .section { padding: 5rem 1.75rem; }
-      .section-heading { font-size: 32px; }
-      .essay-callout { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .section { padding: 4rem 1.25rem; }
+      .section-heading { font-size: 30px; }
+      .inner, .inner-sm { padding: 0; }
       .footer-inner { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; flex-wrap: wrap; }
-      .cta-section h2 { font-size: 36px; }
+      .cta-section h2 { font-size: 32px; }
+      .edge-card { padding: 1.75rem 1.5rem; }
+      .why-card { padding: 1.75rem 1.5rem; }
+      .payment-card { border-radius: 12px; }
     }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
   </style>
@@ -584,7 +592,6 @@
 <nav role="navigation" aria-label="Main navigation">
   <div class="nav">
     <a href="#" class="nav-logo" aria-label="UC Strategy Group home">
-      <span class="nav-logo-dot"></span>
       UC <span>&nbsp;Strategy</span>&nbsp;Group
     </a>
     <ul class="nav-links" id="nav-links">
@@ -607,11 +614,11 @@
 <section class="hero" aria-labelledby="hero-h" id="hero">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-glow" aria-hidden="true"></div>
-  <h1 id="hero-h">Strategic success<br>in the UC System.</h1>
+  <h1 id="hero-h">Strategic success<br>in the UC System</h1>
   <p class="hero-sub">Expert guidance on every aspect of the application process from people who got into every single UC.</p>
   <div class="hero-actions">
     <a href="#diagnostic" class="btn-gold">Book free diagnostic →</a>
-    <a href="#approach" class="btn-outline-white">See how it works</a>
+    <a href="#process" class="btn-outline-white">Dive into the process</a>
   </div>
   <div class="hero-stats" role="list">
     <div class="stat" role="listitem">
@@ -633,8 +640,8 @@
 <section class="section section-light" aria-labelledby="counselors-h">
   <div class="inner">
     <div style="margin-bottom: 3.5rem;">
-      <div class="eyebrow">Your consultants</div>
-      <h2 class="section-heading" id="counselors-h">Meet Our Consultants</h2>
+      <div class="eyebrow">The Team</div>
+      <h2 class="section-heading" id="counselors-h">Meet Your Team</h2>
       <p class="section-sub">Having earned admission to every UC campus, our consultants are now helping the next generation of applicants do the same.</p>
     </div>
     <div class="counselors-grid">
@@ -646,7 +653,7 @@
         </div>
         <div class="c-name">Daniel Wong</div>
         <div class="c-role">Business Administration &amp; Data Science</div>
-        <p class="c-bio">As a student in Berkeley Haas Global Management Program, Daniel specializes in combining strategy with quantitative analysis for each application he advises. Drawing from his background in entrepreneurship, finance, and data analysis, he works closely with students to develop compelling narratives that authentically highlight their interests, impact, and intellectual curiosity.</p>
+        <p class="c-bio">As a student in UC Berkeley's Global Management Program, Daniel specializes in helping students strategically position their experiences, leadership, and achievements throughout the UC application process. Leveraging his background in entrepreneurship, finance, and data analysis, he works with students to develop compelling narratives that authentically showcase their interests, impact, and intellectual curiosity.</p>
         <div class="c-expertise-label">Areas of expertise</div>
         <div class="c-tags">
           <span class="c-tag">UC Admissions Strategy</span>
@@ -733,7 +740,7 @@
     <div style="margin-bottom: 4rem;">
       <div class="eyebrow">Our approach</div>
       <h2 class="section-heading" id="approach-h">Every angle of your application, covered.</h2>
-      <p class="section-sub">We work on the parts that matter most and that most students get wrong.</p>
+      <p class="section-sub">We work on the parts that matter most, correcting mistakes before they are even made.</p>
     </div>
     <div class="edge-grid">
       <div class="edge-card" data-anim="slide-left">
@@ -750,11 +757,11 @@
       </div>
       <div class="edge-card" data-anim="slide-left">
 <h3>Timeline management</h3>
-        <p>A custom roadmap from summer through the November deadline — so nothing gets rushed and nothing gets missed.</p>
+        <p>A personalized roadmap from the day you join our program through the November deadline, ensuring every component of your application is completed on time and nothing is missed.</p>
       </div>
       <div class="edge-card" data-anim="fade-up-scale">
 <h3>Full application review</h3>
-        <p>Before you submit, we go through every section — courses, grades, activities, honors — and catch anything that could cost you.</p>
+        <p>Before you submit, we review every section of your application, including courses, grades, activities, honors, and more. We will catch anything that could cost you.</p>
       </div>
       <div class="edge-card" data-anim="slide-right">
 <h3>Free diagnostic first</h3>
@@ -770,7 +777,7 @@
     <div class="text-center" style="margin-bottom: 3.5rem;">
       <div class="eyebrow">Admissions record</div>
       <h2 class="section-heading" id="campuses-h">Admitted to all 9 UC campuses.</h2>
-      <p class="section-sub">We applied to every UC and got into every one — so we know exactly what each campus is looking for.</p>
+      <p class="section-sub">We applied and earned acceptances to every UC, discovering exactly what each campus is looking for.</p>
     </div>
     <div class="campuses-grid">
       <a href="#diagnostic" class="campus-card" aria-label="UC Berkeley — book a consultation">
@@ -871,14 +878,14 @@
         <div class="p-marker" aria-hidden="true">1</div>
         <div class="p-body">
           <h3>Free diagnostic session <span class="p-badge">Free · 30 min</span></h3>
-          <p>Profile audit, admit odds by campus, gap analysis, and a strategy preview — before you pay anything.</p>
+          <p>Together, we go through profile audits, admit odds, gap analysis, and a strategic preview before any commitment.</p>
         </div>
       </div>
       <div class="process-step" role="listitem">
         <div class="p-marker" aria-hidden="true">2</div>
         <div class="p-body">
           <h3>Strategy and school list</h3>
-          <p>We finalize your campus list, major selections, and overall application approach — including how to navigate impacted programs.</p>
+          <p>In addition to helping you understand impacted programs, we assist to finalize your campus list, major selections, and application approach.</p>
         </div>
       </div>
       <div class="process-step" role="listitem">
@@ -1076,31 +1083,11 @@
 <!-- DIAGNOSTIC -->
 <section class="section section-blue" id="diagnostic" aria-labelledby="diag-h">
   <div class="inner">
-    <div class="diag-wrapper">
-      <div>
-        <div class="eyebrow eyebrow-dim">Free first session</div>
-        <h2 class="section-heading section-heading-white" id="diag-h">A real working session — before you pay anything.</h2>
-        <p class="section-sub section-sub-white" style="margin-bottom: 2.5rem;">We sit down, review your full profile, and give you an honest picture of where you stand and exactly what it'll take to get in.</p>
-        <a href="https://calendly.com/danieltlwong-berkeley" target="_blank" rel="noopener" class="btn-gold">Book your free session →</a>
-      </div>
-      <div class="diag-steps" role="list">
-        <div class="diag-step" role="listitem">
-          <div class="diag-num">01</div>
-          <div><h4>Profile audit</h4><p>GPA, coursework, test scores, and activities reviewed against the real admit profile of each campus you're targeting.</p></div>
-        </div>
-        <div class="diag-step" role="listitem">
-          <div class="diag-num">02</div>
-          <div><h4>Honest admit odds</h4><p>Campus by campus, major by major — a realistic read with no sugarcoating.</p></div>
-        </div>
-        <div class="diag-step" role="listitem">
-          <div class="diag-num">03</div>
-          <div><h4>Gap identification</h4><p>We pinpoint what's strong, what needs work, and where to focus before you write a single word.</p></div>
-        </div>
-        <div class="diag-step" role="listitem">
-          <div class="diag-num">04</div>
-          <div><h4>Strategy preview</h4><p>You leave with a clear picture — school list, major strategy, and PIQ angle — before any commitment.</p></div>
-        </div>
-      </div>
+    <div style="text-align:center; max-width:640px; margin:0 auto;">
+        <div class="eyebrow eyebrow-dim" style="justify-content:center;">Free first session</div>
+        <h2 class="section-heading section-heading-white" id="diag-h">A real working session before you pay anything.</h2>
+        <p class="section-sub section-sub-white" style="margin:1rem auto 2.5rem; max-width:480px;">We sit down, review your full profile, and give you an honest picture of where you stand and exactly what it'll take to get in.</p>
+        <a href="https://calendly.com/danieltlwong-berkeley" target="_blank" rel="noopener" class="btn-gold" style="font-size:16px; padding:20px 48px;">Book your free session →</a>
     </div>
   </div>
 </section>
